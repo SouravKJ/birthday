@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Happy Birthday 🎉</title>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            text-align: center;
+            padding: 40px;
+            color: #333;
+            overflow-x: hidden;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px;
+            margin: auto;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            animation: fadeIn 1.5s ease;
+        }
+
+        h1 {
+            color: #ff3e58;
+            font-size: 36px;
+        }
+        .next-btn, .cut-btn {
+            padding: 12px 25px;
+            background: #ff3e58;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .next-btn:hover, .cut-btn:hover {
+            background: #ff1e40;
+        }
+
+        #candlePage, #cakePage {
+            display: none;
+        }
+
+        #candleImg {
+            width: 250px;
+            cursor: pointer;
+        }
+
+        #cakeImg {
+            width: 260px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        #cakeImg:active {
+            transform: scale(0.95);
+        }
+
+        #cutMsg, #sweetMsg {
+            font-size: 22px;
+            color: #ff1e40;
+            margin-top: 20px;
+            display: none;
+            animation: fadeIn 1.5s ease;
+        }
+
+        /* ------------------------------- */
+        /* Celebration: Confetti */
+        /* ------------------------------- */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: red;
+            top: -10px;
+            animation: fall 3s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+
+        /* ------------------------------- */
+        /* Floating balloons */
+        /* ------------------------------- */
+        .balloon {
+            position: fixed;
+            bottom: -150px;
+            width: 60px;
+            animation: balloonUp 6s ease-in-out forwards;
+        }
+
+        @keyframes balloonUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-120vh); opacity: 0; }
+        }
+
+        /* ------------------------------- */
+        /* Colorful Fireworks */
+        /* ------------------------------- */
+        .firework {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+            animation: explode 1s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(15); opacity: 0; }
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- PAGE 1 -->
+    <div class="card" id="page1">
+        <h1>Happy Birthday, Sweta 🎉</h1>
+        <p style="font-size: 20px;">
+           Wishing you joy, smiles, and beautiful surprises today.  
+        You deserve every good thing the world can offer. 🌸  
+        <br><br>— From Sourav 😊
+        </p>
+
+        <button class="next-btn" onclick="goToCandle()">Next →</button>
+    </div>
+
+    <!-- PAGE 2 – CANDLE -->
+    <div id="candlePage">
+        <h1>🕯 Blow the Candle 🕯</h1>
+        <p>Tap the candle to blow it out!</p>
+
+        <img id="candleImg" src="giphy-downsized.gif" onclick="blowCandle()">
+
+        <p id="blowMsg" style="display:none; color:#ff1e40; font-size:22px;">
+            ✨ Candle Off! Music Starting… 🎶
+        </p>
+
+        <button class="cut-btn" id="goCutBtn" onclick="goToCake()" style="display:none;">
+            Cut the Cake →
+        </button>
+
+        <audio id="hbSong">
+            <source src="happy-birthday-357371.mp3">
+        </audio>
+    </div>
+
+    <!-- PAGE 3 – CAKE CUTTING -->
+    <div id="cakePage">
+        <h1>🎂 Cake Cutting 🎂</h1>
+        <p>Tap the cake to cut it!</p>
+
+        <img id="cakeImg" src="Gemini_Generated_Image_uyuyyduyuyyduyuy.png" onclick="cutCake()">
+
+        <p id="cutMsg">🎉 Cake Cut! Let the celebration begin! 🎉</p>
+        <p id="sweetMsg">💖 Have the brightest, happiest year ahead, Sweta! 💖</p>
+    </div>
+
+
+    <script>
+        function goToCandle() {
+            document.getElementById("page1").style.display = "none";
+            document.getElementById("candlePage").style.display = "block";
+        }
+
+        function blowCandle() {
+            document.getElementById("candleImg").src = "Gemini_Generated_Image_uyuyyduyuyyduyuy.png";
+            document.getElementById("blowMsg").style.display = "block";
+            document.getElementById("hbSong").play();
+
+            setTimeout(() => {
+                document.getElementById("goCutBtn").style.display = "inline-block";
+            }, 3000);
+        }
+
+        function goToCake() {
+            document.getElementById("candlePage").style.display = "none";
+            document.getElementById("cakePage").style.display = "block";
+        }
+
+        function cutCake() {
+            document.getElementById("cakeImg").src = "cakeCut.png";
+            document.getElementById("cutMsg").style.display = "block";
+            document.getElementById("sweetMsg").style.display = "block";
+
+            // Play the same birthday song again (celebration continues)
+            document.getElementById("hbSong").play();
+
+            // Trigger celebration effects
+            launchConfetti();
+            launchBalloons();
+            launchFireworks();
+        }
+
+        /* -------------------------------- */
+        /* CONFETTI */
+        /* -------------------------------- */
+        function launchConfetti() {
+            for (let i = 0; i < 60; i++) {
+                let c = document.createElement("div");
+                c.classList.add("confetti");
+
+                c.style.left = Math.random() * 100 + "vw";
+                c.style.background = randomColor();
+
+                c.style.animationDuration = (Math.random() * 2 + 2) + "s";
+
+                document.body.appendChild(c);
+
+                setTimeout(() => c.remove(), 3500);
+            }
+        }
+
+        /* -------------------------------- */
+        /* BALLOONS */
+        /* -------------------------------- */
+        function launchBalloons() {
+            const balloonColors = ["red", "blue", "yellow", "green", "purple", "orange"];
+
+            for (let i = 0; i < 6; i++) {
+                let b = document.createElement("img");
+                b.classList.add("balloon");
+
+                b.src = "balloon.png"; // balloon PNG
+                b.style.left = Math.random() * 80 + "vw";
+                b.style.animationDuration = (Math.random() * 3 + 5) + "s";
+
+                document.body.appendChild(b);
+
+                setTimeout(() => b.remove(), 6000);
+            }
+        }
+
+        /* -------------------------------- */
+        /* FIREWORKS */
+        /* -------------------------------- */
+        function launchFireworks() {
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => createFirework(), i * 200);
+            }
+        }
+
+        function createFirework() {
+            let fw = document.createElement("div");
+            fw.classList.add("firework");
+
+            fw.style.left = Math.random() * 80 + "vw";
+            fw.style.top = Math.random() * 40 + "vh";
+
+            fw.style.background = randomColor();
+
+            document.body.appendChild(fw);
+
+            setTimeout(() => fw.remove(), 1200);
+        }
+
+        /* Random color helper */
+        function randomColor() {
+            const colors = ["#ff3e58", "#ffcc00", "#00c3ff", "#39ff14", "#ff6b00", "#b300ff"];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+    </script>
+
+</body>
+</html>
