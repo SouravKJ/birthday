@@ -166,10 +166,7 @@
         <p>Tap the cake to cut it!</p>
 
         <img id="cakeImg" src="Gemini_Generated_Image_uyuyyduyuyyduyuy.png" onclick="cutCake()">
-        <br>
-         <button class="cut-btn" id="nextAfterCut" onclick="Last()" style="display:none;">
-            Next →
-        </button>
+
         <p id="cutMsg">🎉 Cake Cut! Let the celebration begin! 🎉</p>
         <p id="sweetMsg">💖 Have the brightest, happiest year ahead, Sweta! 💖</p>
     </div>
@@ -197,21 +194,7 @@
         }
 
         function cutCake() {
-            document.getElementById("cakeImg").src = "cut.gif";
-            document.getElementById("cutMsg").style.display = "none";
-            document.getElementById("sweetMsg").style.display = "none";
-            
-            // SHOW NEXT BUTTON IMMEDIATELY
-    document.getElementById("nextAfterCut").style.display = "inline-block";
-
-            // Play the same birthday song again (celebration continues)
-            document.getElementById("hbSong").play();
-
-            
-        }
-
-        function Last(){
-             document.getElementById("cakeImg").src = "cakeCut.png";
+            document.getElementById("cakeImg").src = "cakeCut.png";
             document.getElementById("cutMsg").style.display = "block";
             document.getElementById("sweetMsg").style.display = "block";
 
@@ -223,6 +206,7 @@
             launchBalloons();
             launchFireworks();
         }
+
         /* -------------------------------- */
         /* CONFETTI */
         /* -------------------------------- */
